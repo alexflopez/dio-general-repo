@@ -1,0 +1,56 @@
+from datetime import datetime
+
+
+menu = """ 
+[d] = Depósito
+[s] = Saque
+[e] = Extrato
+
+
+==>
+"""
+
+saldo: float = 0
+limite: float = 500
+extrato = []
+LIMITE_SAQUES: int = 3 
+registro = datetime.now()
+
+while True:
+
+    option = input(menu).lower()
+
+    if option == "d":
+        
+        print('Depósito'.center(12, '#'))
+        
+        valor:float = float(input("Informe o valor do depósito: ")) 
+
+        if valor > 0:
+            saldo += valor
+            extrato.append(f"Depósito R${saldo:.2f} DATA: {registro} Saldo Atual: {saldo}")
+            print(extrato[-1])
+    elif option == "s":
+        if LIMITE_SAQUES == 0 or LIMITE_SAQUES <= 0:
+            raise 'Limite de saques excedido'
+            break
+        
+        print('Saque'.center(12, '#'))
+        
+        saque:float = float(input("Informe o valor do saque: ")) 
+        
+        if saque > saldo:
+            raise f'Saldo insuficiente'
+            exit(1)
+        elif saque < saldo:
+            saldo -= saque
+            extrato.append(f"Saque R${saldo:.2f} DATA: {registro} Saldo Atual: {saldo}")
+            print(extrato[-1])
+
+            LIMITE_SAQUES -= 1            
+    elif option == "e":
+        print('Extrato'.center(12, '#'))
+        print(extrato[-1])
+    else:
+        raise 'Opção Inválida'
+        exit(1)
