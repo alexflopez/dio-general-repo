@@ -1,0 +1,54 @@
+import datetime
+import itertools
+
+
+class Bank:
+
+    conta = itertools.count(1001)
+    saldo = 0
+    limite = 100
+    history = []
+    num_saques = 3
+
+    def __init__(self: object, nome: str, cpf: str, endereco:str, saldo: float=0, limite: float=100) -> None:
+        self.numero_conta: int = next(Bank.conta) 
+        self.nome: str = nome
+        self.cpf: str = cpf
+        self.endereco: str = endereco
+        self.saldo: float = saldo
+        self.limite: float = limite
+
+    def depositar(self, valor):
+        if valor <= 0:
+            print('Operação inválida: Valor inválido')
+            exit(1)
+        else:
+            self.saldo += valor
+            self.history.append(datetime.datetime.now())
+
+    def sacar(self, valor):
+        if valor <= 0:
+            exit(1)
+        else:
+            if valor > self.saldo + self.limite:
+                print('Saldo insuficiente')
+                exit(1)
+            elif valor <= self.saldo + self.limite:
+                self.saldo -= valor
+                self.history.append(datetime.datetime.now())
+            else:
+                exit(1)
+
+    def transferir(self: object, numero_conta, valor: float) -> None:
+        if valor <= 0:
+            exit(1)
+        else:
+            if valor <= self.saldo and valor > 0:
+                self.saldo -= valor
+                numero_conta.saldo += valor 
+                self.history.append(datetime.datetime.now())
+            else:
+                print(f'Saldo insuficiente')
+                
+    def get_saldo(self):
+        return self.saldo
