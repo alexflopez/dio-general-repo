@@ -2,36 +2,86 @@ import datetime
 from abc import ABC
 
 class Conta:
-    def __init__(self, saldo: float, numero: int, agencia: str, cliente: object, historico: object) -> None:
+    def __init__(self, saldo, numero, cliente) -> None:
         self._saldo = saldo
         self._numero = numero
-        self._agencia = agencia
+        self._agencia = "0001"
         self._cliente = cliente
-        self._historico = historico
+        self._historico = Historico()
 
     @property
     def saldo(self):
         return self._saldo
     
-    def nova_conta(self):
-        pass
+    @classmethod
+    def nova_conta(cls, cliente, numero):
+        return cls(numero, cliente)
 
-    def sacar(self):
-        pass
+    @property
+    def numero(self):
+        return self._numero
+    
+    @property
+    def agencia(self):
+        return self._agencia
+    
+    @property
+    def cliente(self):
+        return self._cliente
+    
+    @property
+    def historico(self):
+        return self._historico
 
-    def depositar(self):
-        pass
+    def sacar(self, valor):
+        if self._saldo > valor:
+            self._saldo -= valor
+            print('Operação efetuada com sucesso')
+        elif valor > self._saldo:
+            print('Saldo Insuficiente')
+        else:
+            print('Ocorreu um erro interno.')
+            exit(1)
 
+    def depositar(self, valor):
+        if self.valor > 0:
+            self._saldo += valor
+        else:
+            print('Ocorreu um erro interno.')
+            exit(1)
 
-class ContaCorrente():
-    def __init__(self, limite: float, limite_saques: int) -> None:
-        pass
+class ContaCorrente(Conta):
+    def __init__(self, saldo, numero, cliente, limite=500, limite_saques=3):
+        super().__init__(saldo, numero, cliente)
+        self.limite = limite
+        self.limite_saques = limite_saques
 
+    def sacar(self, valor):
+        if self._saldo > valor and self.limite_saques > 0:
+            self._saldo -= valor
+            print('Operação efetuada com sucesso')
+        elif valor > self._saldo:
+            print('Saldo Insuficiente')
+        else:
+            print('Ocorreu um erro interno.')
+            exit(1)
+
+        self.limite_saques -= 1
 
 class Historico:
-    def __init__(self, transacao: object) -> None:
-        self._transacao = transacao
+    def __init__(self):
+        self._transacoes = []
 
+    @property
+    def transacoes(self):
+        return self._transacoes
+
+    def adicionar_transacao(self, transacao):
+        self._transacoes.append({
+                "tipo": transacao.__class__.__name__,
+                "valor": transacao.valor,
+                "data": datetime.now().strftime("%d-%m-%Y %H:%M:%s")
+            })
 
 
 class Transacao(ABC):
@@ -41,20 +91,23 @@ class Transacao(ABC):
 
 
 class Cliente:
-    def __init__(self, endereco: str, contas: object) -> None:
+    def __init__(self, endereco) -> None:
         self._endereco = endereco
-        self._contas = contas
+        self._contas = []
 
-    def realizar_transacao(conta: object, trasacao: object):
-        pass
+    def realizar_transacao(conta, transacao):
+        transacao.registrar(conta)
 
-    def adicionar_conta(conta: object):
-        pass
+    def adicionar_conta(self, conta):
+        self.contas.append(conta)
 
 
 class PessoaFisica(Cliente):
 
-    def __init__(self, cpf: str, nome: str, data_nascimento: str, **kwargs) -> None:
-        super().__init__(cpf, nome, data_nascimento, **kwargs)
+    def __init__(self, cpf, nome, data_nascimento, endereco):
+        super().__init__(endereco)
+        self.nome = nome
+        self.data_nascimento = data_nascimento
+        self.cpf = cpf
 
 
