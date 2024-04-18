@@ -67,6 +67,14 @@ class ContaCorrente(Conta):
             exit(1)
 
         self.limite_saques -= 1
+    
+    def depositar(self, valor):
+        if valor > 0:
+            self._saldo += valor
+            print('Operação efetuada com sucesso')
+        else:
+            print('Ocorreu um erro interno.')
+            exit(1)
 
 class Historico:
     def __init__(self):
@@ -109,5 +117,4 @@ class PessoaFisica(Cliente):
         self.nome = nome
         self.data_nascimento = data_nascimento
         self.cpf = cpf
-
 
