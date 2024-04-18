@@ -1,0 +1,60 @@
+import datetime
+from abc import ABC
+
+class Conta:
+    def __init__(self, saldo: float, numero: int, agencia: str, cliente: object, historico: object) -> None:
+        self._saldo = saldo
+        self._numero = numero
+        self._agencia = agencia
+        self._cliente = cliente
+        self._historico = historico
+
+    @property
+    def saldo(self):
+        return self._saldo
+    
+    def nova_conta(self):
+        pass
+
+    def sacar(self):
+        pass
+
+    def depositar(self):
+        pass
+
+
+class ContaCorrente():
+    def __init__(self, limite: float, limite_saques: int) -> None:
+        pass
+
+
+class Historico:
+    def __init__(self, transacao: object) -> None:
+        self._transacao = transacao
+
+
+
+class Transacao(ABC):
+
+    def registrar():
+        pass
+
+
+class Cliente:
+    def __init__(self, endereco: str, contas: object) -> None:
+        self._endereco = endereco
+        self._contas = contas
+
+    def realizar_transacao(conta: object, trasacao: object):
+        pass
+
+    def adicionar_conta(conta: object):
+        pass
+
+
+class PessoaFisica(Cliente):
+
+    def __init__(self, cpf: str, nome: str, data_nascimento: str, **kwargs) -> None:
+        super().__init__(cpf, nome, data_nascimento, **kwargs)
+
+
