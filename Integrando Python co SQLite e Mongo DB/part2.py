@@ -46,3 +46,4 @@ res = db.posts.insert_many(bank)
 
 for data in bank.find():
     pprint.pp(data)
+
