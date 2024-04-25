@@ -62,7 +62,7 @@ from tabulate import tabulate
 
 @app.route('/')
 def index(dataframe):
-  return render_template('index.html', tabulate(df, tablefmt='html'))
+  return render_template('index.html', tabulate(dataframe, tablefmt='html'))
 
 if __name__ == '__main__':
   ngrok_tunnel = ngrok.connect(5000)
