@@ -9,7 +9,7 @@ Original file is located at
 
 !pip install pyngrok -q
 
-!ngrok config add-authtoken 2fYg2mvDNWlZrkqSrpcRl4LgAmd_4gXGsesEwgudpin2i2YSd
+!ngrok config add-authtoken [YOUR TOKEN HERE]
 
 from flask import Flask, render_template, request
 from pyngrok import ngrok
