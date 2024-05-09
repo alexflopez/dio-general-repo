@@ -15,6 +15,6 @@ no Microsoft Azure ou qualquer outra origem remota de preferência.
 
 # Como usar
 
-- 1. Faça o download do arquivo .pbix;
-- 2. Abra o arquivo utilizando Power BI Desktop;
-- 3. Conecte o dashboard à fonte de dados;
+- Faça o download do arquivo .pbix;
+- Abra o arquivo utilizando Power BI Desktop;
+- Conecte o dashboard à fonte de dados;
