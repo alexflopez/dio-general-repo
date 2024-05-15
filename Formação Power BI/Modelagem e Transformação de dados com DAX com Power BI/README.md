@@ -3,9 +3,9 @@
 - Tabela dim_produto
 A partir da tabela normalizada, foi duplicada uma cópia, após isso,  Transformar dados/ Home/Group BY/Advanced selecionando as seguintes opções:
 
-===================================
-Nome da Coluna - Operação - Coluna
-===================================
+
+** Nome da Coluna - Operação - Coluna **
+
 Contagem - SUM - Units sold
 Valor mínimo de venda - MIN - Sale Price 
 Valor máximo de venda - MAX - Sale Price
